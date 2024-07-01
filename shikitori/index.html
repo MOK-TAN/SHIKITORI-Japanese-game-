@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0px;
+        margin: 0px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .container {
+        width: 100%;
+
+        position: relative;
+      }
+
+      /* rules */
+      #rules {
+        display: block;
+        margin-top: 20px;
+        padding: 12px 16px;
+        border: 1px solid rgba(181, 180, 180, 0.626);
+        border-radius: 4px;
+      }
+
+      #rules > h5 {
+        font-size: 16px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+        text-decoration: underline;
+        /* color: blue; */
+        color: rgb(77, 77, 77);
+      }
+
+      .f-gray {
+        color: rgb(77, 77, 77);
+      }
+
+      #rules > h5:hover,
+      .game_title:hover {
+        color: blue;
+      }
+
+      #message_exit:hover {
+        background-color: blue;
+        color: white;
+      }
+
+      #rules > p {
+        font-size: 14px;
+        text-align: left;
+        font-weight: 600;
+        color: rgb(75, 72, 72);
+        margin-bottom: 12px;
+      }
+
+      #rules > p > span {
+        font-weight: 400;
+      }
+
+      .btn_blue {
+        color: blue;
+      }
+
+      /* start game btn */
+      #start_game {
+        margin-top: 100px;
+        font-weight: 550;
+        display: inline-block;
+        font-size: 16px;
+        padding: 12px 22px;
+        /* line-height: 1.6; */
+        /* border: 1px solid rgba(154, 145, 145, 0.781);
+        border-radius: 8px; */
+        /* background-color: rgb(255, 255, 255); */
+        text-decoration: underline;
+        /* color: rgb(77, 77, 77); */
+        /* color: blue; */
+      }
+
+      #show_exit {
+        margin-top: 100px;
+        font-weight: 550;
+        display: inline-block;
+        font-size: 16px;
+        padding: 12px 22px;
+        /* line-height: 1.6; */
+        /* border: 1px solid rgba(154, 145, 145, 0.781);
+        border-radius: 8px; */
+        /* background-color: rgb(255, 255, 255); */
+        text-decoration: underline;
+        /* color: rgb(77, 77, 77); */
+        /* color: blue; */
+        display: none;
+      }
+
+      .btn {
+        border: 1px solid rgba(154, 145, 145, 0.781);
+        border-radius: 8px;
+        background-color: rgb(255, 255, 255);
+      }
+
+      #add_word {
+        font-size: 12px;
+        padding: 8px 16px;
+        /* color: rgb(77, 77, 77); */
+        font-weight: 550;
+      }
+
+      #input_word {
+        padding: 6px 24px;
+        border-radius: 6px;
+        border: 1px solid gray;
+        color: rgb(77, 77, 77);
+        font-weight: 550;
+      }
+
+      #input_word::placeholder {
+        font-weight: 450;
+      }
+
+      #add_word:hover,
+      #start_game:hover,
+      #show_exit:hover {
+        color: rgb(255, 255, 255);
+        background-color: rgb(60, 60, 60);
+      }
+
+      .game_title {
+        font-size: 38px;
+        line-height: 1.8;
+      }
+
+      #whole_game {
+        width: 450px;
+        margin: 0 auto;
+        text-align: center;
+        padding-top: 50px;
+      }
+      #display_game {
+        margin-top: 60px;
+        display: none;
+      }
+
+      ul#display_words {
+        list-style: none;
+        padding: 12px 0px;
+      }
+
+      .valid {
+        border: 1px solid rgb(47, 207, 47);
+      }
+
+      .invalid {
+        border: 1px solid red;
+      }
+
+      li {
+        width: 50%;
+        margin: 0 auto;
+        border: 1px solid gray;
+        padding: 8px 12px;
+        border-radius: 9px;
+        margin-bottom: 6px;
+        font-size: 14px;
+        font-weight: 550;
+        border: 1px solid rgb(47, 207, 47);
+      }
+      /* <div id="display_model">
+        <div class="message_box">
+          <button id="message_exit">exit</button>
+          <p id="message_display">YOU CLICKED HERE</p>
+        </div>
+      </div> */
+
+      #display_model {
+        width: 100%;
+        height: 500px;
+        background-color: rgba(0, 255, 255, 0.155);
+        padding-top: 60px;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .message_box {
+        width: 50%;
+        height: 70%;
+        border: 1px solid black;
+        margin: 0 auto;
+        text-align: center;
+        border-radius: 8px;
+        background-color: rgba(230, 136, 136, 0.936);
+      }
+
+      #message_exit {
+        padding: 6px 12px;
+        font-size: 12px;
+        /* background-color: rgb(239, 235, 235);
+         */
+
+        color: black;
+        text-align: right;
+        float: right;
+        /* border-bottom: 1px solid black; */
+      }
+
+      .clear {
+        clear: both;
+      }
+
+      .message_container {
+        width: 60%;
+        margin: 0 auto;
+        border: 1px solid white;
+        border-radius: 4px;
+        margin-top: 10px;
+        /* padding: 4px 8px; */
+        padding: 0 8px;
+      }
+
+      #top {
+        border-bottom: 1px solid rgb(50, 50, 50);
+        padding: 8px 0;
+        overflow: hidden;
+      }
+
+      #message_display {
+        font-size: 16px;
+        font-weight: 600;
+        color: rgb(28, 28, 28);
+        padding: 100px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="display_model">
+        <div class="message_box">
+          <div class="message_container">
+            <div id="top">
+              <button class="btn" id="message_exit">X</button>
+              <div class="clear"></div>
+            </div>
+
+            <p id="message_display">YOU CLICKED HERE</p>
+          </div>
+        </div>
+      </div>
+      <div id="whole_game">
+        <h4 class="game_title">SHIKITORI GAME</h4>
+
+        <button id="start_game" class="btn btn_blue">START GAME</button>
+
+        <div id="rules">
+          <h5>#RULES</h5>
+          <p>
+            1. NO-REPEATED WORD <br />
+            2. LAST LETTER MATCH WITH FIRST LETTER
+            <br />
+            ex : <span>appl</span><mark>e</mark> <span> -></span> <mark>e</mark>
+            <span>mail</span>
+          </p>
+        </div>
+
+        <div id="display_game">
+          <div id="game_input">
+            <input type="text" id="input_word" placeholder="Enter word.." />
+            <button id="add_word" class="btn btn_blue">ADD</button>
+          </div>
+          <div>
+            <ul id="display_words">
+              <!-- <li class="valid f-gray">apple</li>
+              <li class="valid">elephant</li> -->
+              <!-- <li>teeth</li> -->
+            </ul>
+          </div>
+        </div>
+        <!-- <button id="show_exit">SHOW EXIT</button> -->
+        <button id="show_exit" class="btn btn_blue">RESTART GAME</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- <div id="alert_box">
+      <div class="message">
+        <h3>HELLO WORLD</h3>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos
+          reiciendis doloribus pariatur.
+        </p>
+      </div>
+    </div>
+
+    <div id="exercise">
+      <p>HELLO WORLD</p>
+      <div id="second_exercise">
+        <p>WORLD IS MINE HERE</p>
+      </div>
+    </div>
+    #alert_box {
+        width: 100%;
+        background-color: rgba(255, 0, 0, 0.4);
+
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+      }
+
+      #alert_box > .message {
+        width: 420px;
+        margin: 0 auto;
+        padding-top: 55px;
+        background-color: azure;
+        height: 20%;
+      }
+
+      #exercise {
+        background-color: aqua;
+        position: relative;
+        height: 50vh;
+      }
+
+      #second_exercise {
+        width: 100%;
+        background-color: blue;
+        position: absolute;
+        top: 50%;
+        bottom: 50%;
+        height: 50px;
+      }
+  
+  -->
